@@ -1,41 +1,88 @@
-#property investment $1,600,000
-#32 unit apartment building (2bed 2bath per unit)
-#down payment 10%
-#refinishing supplies $30,000 per unit + ($10,000 per unit for refinishing workers) = $320,000
-#new gym $30,000
-#new laundry facility $30,000
-#coffee shop $70,000
-#parking garage $15,000
-investment = 625,000
+class MyROI:
+    
+    
+    def __init__(self, income, expenses, cashFlow, ConC, Invest):
+        self.income = income
+        self.expenses = expenses
+        self.cashFlow = cashFlow
+        self.ConC = ConC
+        self.Invest = Invest
+        
+        
+    def Income(self):
+        self.income = float(input('Enter Total Rental Income (Amount before expenses)\n(example input: 5000) '))
+        
+        
+    def Expenses(self):
+        self.expenses = float(input('Enter Property Expenses(Repair and maintenance cost)\n(example input: 3000) '))
+        
+        
+    def CashFlow(self):
+        self.cashFlow = self.income - self.expenses
+        print(f"Your CASHFLOW is {self.cashFlow}")
+   
+        
+    def Inv(self):
+        dp = float(input('Enter your Down Payment amount '))
+        self.Invest += dp
+        close = float(input('Enter Total Closing Cost '))
+        self.Invest += close
+        repair = float(input('Enter Total Repair Cost '))
+        self.Invest += repair
+        misc = float(input('Enter any other investment cost '))
+        self.Invest += misc
+        print(f'Your total investment is {self.Invest}')
+        
+        
+    def ROI(self):
+        acf = self.cashFlow * 12
+        self.roi = acf/self.Invest * 100
+        print(f'Your estimated ROI is {self.roi}%.\nIf this is incorrect, please review your and try again. ')
+        
+        
+    def View(self):
+        print(f'Total Rental Income: {self.income}')
+        print(f'Total Property Expense: {self.expenses}')
+        print(f'Total Cash Flow: {self.cashFlow}')
+        print(f'Total Investment Value: {self.Invest}. \nThis value includes: \n - Down Payment \n - Total Closing Cost \n - Extra Expenses')
+        print(f'Your Estimated ROI is {self.roi}% ')
+        
+        
+def Driver():
+    while True:
+        print('We need to calculate')
+        estamate.Income()
+        estamate.Expenses()
+        estamate.CashFlow()
+        estamate.Inv()
+        estamate.ROI()
+        response = input('What would you like to do? [Q]uit, [R]eview your info, or [S]tart over? ').upper
+        if response == 'Q':
+            break
+        elif response == 'S':
+            continue
+        elif response == 'R':
+            estamate.View()
+            response_2 = input('Would you like to [Q]uit, or [S]tart over? [C]hange my info? ').upper
+            if response_2 == 'Q':
+                break
+            elif response_2 == 'S':
+                continue
+            elif response_2 == 'C':
+                response_3 = input('What would you like to edit?\n[I]ncome, [E]xpenses, [T]otal investment ').upper
+                if response_3 == 'I':
+                    estamate.Income()
+                    estamate.CashFlow()
+                    response = input('Would you like to [Q]uit, [R]eview your info, or [s]tart over? ').upper    
+                elif response_3 == 'E':
+                    estamate.Expenses()
+                    estamate.CashFlow()
+                    response = input('Would you like to [Q]uit, [R]eview your info, or [S]tart over? ').upper
+                elif response_3 == 'T':
+                    estamate.TotalInv
+                    response = input('Would you like to [Q]uit, [R]eview your info, or [S]tart over? ').upper
+        
 
-#annual debt service(interest/morgage) $16,719.62
-#cost of supplies for coffee shop $10,000
-#cost of supplies for gym $600
-#property tax at .87% ($1,160 per month)
-#insurance $100 per unit = $3,200 per month
-#HOA $100 per unit = $3,200 per month
-#repairs $100 per unit = $3,200 per month
-#cap-ex $100 per unit = $3,200
-#property manager $5,000
-#staff including coffee shop workers(6), maintenace(4), leasing office staff(4) = $46,666
-expenses = 86,545.62
+estamate = MyROI(0, 0, 0, 0, 0)
 
-#rent $2,000 * 32 units = $64,000
-#laundry avg. $50 per unit (50*32) = $1600
-#gym fee $50 per unit (50*32) = $1600
-#parking fee $100 per unit (100*32) = $3,200
-#coffee shop income (([avg. bill=7]*[avg.200 customers per day]*[365 days]= $511,000)/(12))= $42,583.33
-income = 112,983.33
-
-
-def ROI(investment, expenses, income):
-
-    cash_flow = income - expenses
-    annual_cash_flow = cash_flow*12
-
-
-    ROI = (annual_cash_flow/investment)*100
-
-    print(ROI)
-
-ROI(investment, expenses, income)
+Driver()
